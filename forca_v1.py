@@ -1,7 +1,8 @@
 # Hangman Game (Jogo da Forca)
 
 # Import
-import random
+import random, argparse, sys
+
 
 # Board (tabuleiro)
 board = ['''
@@ -127,10 +128,16 @@ class Hangman:
 
 # Função para ler uma palavra de forma aleatória do banco de palavras
 def rand_word():
-    with open("palavras.txt", "rt") as f:
-        bank = f.readlines()
-    return bank[random.randint(0, len(bank))].strip()
-
+    parser = argparse.ArgumentParser(description = 'Jogo da Forca')
+    parser.add_argument('--path', default='palavras.txt', help='')
+    args = parser.parse_args()
+    try:    
+        with open(args.path, "rt") as f:
+            bank = f.readlines()
+        return bank[random.randint(0, len(bank))].strip()
+    except FileNotFoundError: 
+       print(f'Arquivo {args.path} não encontrado')
+       sys.exit(1)
 
 # Função Main - Execução do Programa
 def main():
