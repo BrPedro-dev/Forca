@@ -1,7 +1,7 @@
 # Hangman Game (Jogo da Forca)
 
 # Import
-import random, argparse, sys
+import random, argparse, sys, os
 
 
 # Board (tabuleiro)
@@ -116,6 +116,7 @@ class Hangman:
 
     # Método para checar o status do game e imprimir o board na tela
     def print_game_status(self):
+        os.system('cls||clear')
         if self.contador <= 6:
             print(board[self.contador])
         print(f"\nA palavra secreta é : {self.hide_word()}")
